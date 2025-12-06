@@ -23,7 +23,11 @@ export default function Register() {
 
     try {
       // Create User
-      const userCred = await createUserWithEmailAndPassword(auth, email, password);
+      const userCred = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
       // Update display name
       await updateProfile(userCred.user, { displayName: name });
@@ -34,6 +38,27 @@ export default function Register() {
         name,
         email,
         createdAt: new Date().toISOString(),
+      });
+      // Refresh Firebase user data
+      await userCred.user.reload();
+      const user = auth.currentUser;
+
+      console.log("🔥 Sending to /api/signup:", {
+        email: user.email,
+        displayName: user.displayName,
+        uid: user.uid,
+      });
+
+      // Send to your backend → n8n
+      await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: user.email,
+          displayName: user.displayName || name,
+          uid: user.uid,
+          createdAt: new Date().toISOString(),
+        }),
       });
 
       setSuccessMsg("Registration successful!");
@@ -126,12 +151,12 @@ export default function Register() {
           )}
         </form>
 
-         <div className="py-4 text-center">
-            Already have an account?{" "}
-            <span onClick={()=> router.push("/Login")} className="text-blue-600">
-              Login here
-            </span>
-          </div>
+        <div className="py-4 text-center">
+          Already have an account?{" "}
+          <span onClick={() => router.push("/Login")} className="text-blue-600">
+            Login here
+          </span>
+        </div>
       </div>
     </div>
   );

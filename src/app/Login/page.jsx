@@ -23,6 +23,7 @@ export default function Login() {
       setLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
 
+    
       setEmail("");
       setPassword("");
       router.push("/Home");
@@ -30,7 +31,10 @@ export default function Login() {
       console.error(error);
       let msg = "Failed to login";
 
-      if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
+      if (
+        error.code === "auth/user-not-found" ||
+        error.code === "auth/wrong-password"
+      ) {
         msg = "Invalid email or password.";
       } else if (error.code === "auth/invalid-credential") {
         msg = "Invalid credentials. Please check your email and password.";
@@ -50,7 +54,9 @@ export default function Login() {
         onSubmit={handleSubmit}
         className="bg-gray-400 shadow-lg rounded-xl p-6 w-full max-w-md space-y-5"
       >
-        <h2 className="text-2xl text-black font-bold text-center mb-4">Login</h2>
+        <h2 className="text-2xl text-black font-bold text-center mb-4">
+          Login
+        </h2>
 
         <div className="space-y-2">
           <label className="text-sm text-black font-semibold">Email</label>
@@ -83,16 +89,16 @@ export default function Login() {
           {loading ? "Loading..." : "Login"}
         </button>
 
-    <div className="py-4 text-center">
-  Don’t have an account?{" "}
-  <span
-    onClick={() => router.push("/Register")}
-    className="text-blue-600 cursor-pointer"
-    >
-    Register here
-  </span>
-</div>
-    </form>
+        <div className="py-4 text-center">
+          Don’t have an account?{" "}
+          <span
+            onClick={() => router.push("/Register")}
+            className="text-blue-600 cursor-pointer"
+          >
+            Register here
+          </span>
+        </div>
+      </form>
     </div>
   );
 }
