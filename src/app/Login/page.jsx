@@ -52,7 +52,7 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-white p-4">
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-400 shadow-lg rounded-xl p-6 w-full max-w-md space-y-5"
+        className=" shadow-xl rounded-xl p-6 w-full max-w-md space-y-5 border border-solid-1px"
       >
         <h2 className="text-2xl text-black font-bold text-center mb-4">
           Login
@@ -89,7 +89,7 @@ export default function Login() {
           {loading ? "Loading..." : "Login"}
         </button>
 
-        <div className="py-4 text-center">
+        <div className="py-4 text-center text-black">
           Don’t have an account?{" "}
           <span
             onClick={() => router.push("/Register")}
