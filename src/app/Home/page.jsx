@@ -16,8 +16,8 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen flex text-black items-center justify-center bg-gray-50 p-6">
-      <div className="max-w-2xl w-full bg-white p-8 rounded-2xl shadow">
+    <div className="min-h-screen flex text-black items-center justify-center bg-gray-50 p-6 shadow">
+      <div className="max-w-2xl w-full bg-white p-8 rounded-2xl shadow-xl">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold">Welcome, {user?.displayName ?? user?.email ?? "User"}</h2>
           <button onClick={handleLogout} className="text-sm px-3 py-1 border bg-blue-600 text-white py-2 rounded-lg ">Logout</button>
